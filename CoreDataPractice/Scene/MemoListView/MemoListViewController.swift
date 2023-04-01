@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class MemoListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
