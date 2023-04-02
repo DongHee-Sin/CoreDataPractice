@@ -10,6 +10,11 @@ import Foundation
 import CoreData
 
 @objc(MemoData)
-public class MemoData: NSManagedObject {
+public final class MemoData: NSManagedObject {
 
+    let dateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter
+    }()
 }
