@@ -22,9 +22,9 @@ final class CoreDataManager {
     
     private let modelName = "MemoData"
     
-
     
-    // MARK: - Create
+    
+    // MARK: - Methods
     
     func saveMemoData(text: String, color: ColorType, completion: CompletionHandler) {
         defer { completion() }
@@ -39,18 +39,10 @@ final class CoreDataManager {
         memoData.color = color.rawValue
         
         if context.hasChanges {
-            do {
-                try context.save()
-            }
-            catch {
-                print(error)
-            }
+            saveContext(context: context)
         }
     }
     
-    
-    
-    // MARK: - Delete
     
     func deleteMemoData(data: MemoData, completion: CompletionHandler) {
         defer { completion() }
@@ -59,11 +51,10 @@ final class CoreDataManager {
               let context
         else { return }
         
-        let request = NSFetchRequest<NSManagedObject>(entityName: modelName)
-        request.predicate = NSPredicate(format: "date = %@", date as CVarArg)
+        let request = fetchRequest(date: date)
         
         do {
-            guard let fetchedMemoList = try context.fetch(request) as? [MemoData],
+            guard let fetchedMemoList = try fetchMemoList(context: context, request: request),
                   let targetMemo = fetchedMemoList.first
             else { return }
             
@@ -71,16 +62,59 @@ final class CoreDataManager {
             context.delete(targetMemo)
             
             if context.hasChanges {
-                do {
-                    try context.save()
-                }
-                catch {
-                    print(error)
+                saveContext(context: context)
+            }
+        }
+        catch {
+            print(error)
+        }
+    }
+    
+    
+    func updateMemoData(newMemoData: MemoData, completion: CompletionHandler) {
+        defer { completion() }
+        
+        guard let date = newMemoData.date,
+              let context = context
+        else { return }
+        
+        let request = fetchRequest(date: date)
+        
+        do {
+            if let fetchedMemoList = try fetchMemoList(context: context, request: request) {
+                if var targetMemo = fetchedMemoList.first {
+                    targetMemo = newMemoData
+                    
+                    if context.hasChanges {
+                        saveContext(context: context)
+                    }
                 }
             }
         }
         catch {
             print(error)
         }
+    }
+    
+    
+    private func fetchRequest(date: Date) -> NSFetchRequest<NSManagedObject> {
+        let request = NSFetchRequest<NSManagedObject>(entityName: modelName)
+        request.predicate = NSPredicate(format: "date = %@", date as CVarArg)
+        return request
+    }
+    
+    
+    private func saveContext(context: NSManagedObjectContext) {
+        do {
+            try context.save()
+        }
+        catch {
+            print(error)
+        }
+    }
+    
+    
+    private func fetchMemoList(context: NSManagedObjectContext, request: NSFetchRequest<NSManagedObject>) throws -> [MemoData]? {
+        return try context.fetch(request) as? [MemoData]
     }
 }
