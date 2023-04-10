@@ -12,6 +12,11 @@ final class CoreDataManager {
     
     typealias CompletionHandler = () -> Void
     
+    enum FetchRequestType {
+        case memoList(ascending: Bool)
+        case datePredicate(date: Date)
+    }
+    
     // MARK: - Propertys
     
     static let shared = CoreDataManager()
@@ -25,6 +30,26 @@ final class CoreDataManager {
     
     
     // MARK: - Methods
+    
+    func getMemoDataListFromCoreData() -> [MemoData] {
+        var memoList: [MemoData] = []
+        
+        guard let context else { return memoList }
+        
+        let request = fetchRequest(type: .memoList(ascending: false))
+        
+        do {
+            if let fetchedMemoList = try fetchMemoList(context: context, request: request) {
+                memoList = fetchedMemoList
+            }
+        }
+        catch {
+            print(error)
+        }
+        
+        return memoList
+    }
+    
     
     func saveMemoData(text: String, color: ColorType, completion: CompletionHandler) {
         defer { completion() }
@@ -51,7 +76,7 @@ final class CoreDataManager {
               let context
         else { return }
         
-        let request = fetchRequest(date: date)
+        let request = fetchRequest(type: .datePredicate(date: date))
         
         do {
             guard let fetchedMemoList = try fetchMemoList(context: context, request: request),
@@ -78,7 +103,7 @@ final class CoreDataManager {
               let context = context
         else { return }
         
-        let request = fetchRequest(date: date)
+        let request = fetchRequest(type: .datePredicate(date: date))
         
         do {
             if let fetchedMemoList = try fetchMemoList(context: context, request: request) {
@@ -97,9 +122,17 @@ final class CoreDataManager {
     }
     
     
-    private func fetchRequest(date: Date) -> NSFetchRequest<NSManagedObject> {
+    private func fetchRequest(type: FetchRequestType) -> NSFetchRequest<NSManagedObject> {
         let request = NSFetchRequest<NSManagedObject>(entityName: modelName)
-        request.predicate = NSPredicate(format: "date = %@", date as CVarArg)
+        
+        switch type {
+        case .memoList(let ascending):
+            let dateOrder = NSSortDescriptor(key: "date", ascending: ascending)
+            request.sortDescriptors = [dateOrder]
+        case .datePredicate(let date):
+            request.predicate = NSPredicate(format: "date = %@", date as CVarArg)
+        }
+        
         return request
     }
     
