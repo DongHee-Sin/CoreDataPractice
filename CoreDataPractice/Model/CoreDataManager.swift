@@ -27,6 +27,8 @@ final class CoreDataManager {
     
     private let modelName = "MemoData"
     
+    var memoListCount: Int { return getMemoDataListFromCoreData().count }
+    
     
     
     // MARK: - Methods
