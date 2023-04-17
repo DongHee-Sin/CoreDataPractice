@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MemoTableViewCell: UITableViewCell {
+final class MemoTableViewCell: UITableViewCell {
     
     @IBOutlet weak var memoLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -18,7 +18,8 @@ class MemoTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

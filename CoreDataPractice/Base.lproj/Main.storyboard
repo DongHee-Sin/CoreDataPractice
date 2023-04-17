@@ -42,7 +42,7 @@
         <!--Detail View Controller-->
         <scene sceneID="EVA-5t-mzv">
             <objects>
-                <viewController id="bSN-Sc-HWH" customClass="DetailViewController" customModule="CoreDataPractice" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" id="bSN-Sc-HWH" customClass="DetailViewController" customModule="CoreDataPractice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="egj-r6-yRe">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

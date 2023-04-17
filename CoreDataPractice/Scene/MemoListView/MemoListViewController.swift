@@ -47,13 +47,13 @@ final class MemoListViewController: UIViewController {
     private func setTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.separatorStyle = .none
-        tableView.register(MemoTableViewCell.self, forCellReuseIdentifier: MemoTableViewCell.identifier)
+        tableView.register(UINib(nibName: MemoTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: MemoTableViewCell.identifier)
     }
     
     
     @objc private func plusButtonTapped() {
-        // ...
+        guard let detailVC = self.storyboard?.instantiateViewController(identifier: DetailViewController.identifier) else { return }
+        present(detailVC, animated: true)
     }
 }
 
@@ -62,7 +62,7 @@ final class MemoListViewController: UIViewController {
 extension MemoListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return coreDataManager.memoListCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

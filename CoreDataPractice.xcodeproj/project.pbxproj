@@ -14,6 +14,7 @@
 		D083875129D814AF0098C5C1 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D083875029D814AF0098C5C1 /* CoreDataManager.swift */; };
 		D083875729D816AB0098C5C1 /* MemoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D083875529D816AB0098C5C1 /* MemoTableViewCell.swift */; };
 		D083875829D816AB0098C5C1 /* MemoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D083875629D816AB0098C5C1 /* MemoTableViewCell.xib */; };
+		D098BFE929ED8FA3005DB231 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D098BFE829ED8FA3005DB231 /* UIViewController+Extension.swift */; };
 		D0E59D7129D5D3E000A5B7D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E59D7029D5D3E000A5B7D9 /* AppDelegate.swift */; };
 		D0E59D7329D5D3E000A5B7D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E59D7229D5D3E000A5B7D9 /* SceneDelegate.swift */; };
 		D0E59D7529D5D3E000A5B7D9 /* MemoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E59D7429D5D3E000A5B7D9 /* MemoListViewController.swift */; };
@@ -31,6 +32,7 @@
 		D083875029D814AF0098C5C1 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		D083875529D816AB0098C5C1 /* MemoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoTableViewCell.swift; sourceTree = "<group>"; };
 		D083875629D816AB0098C5C1 /* MemoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemoTableViewCell.xib; sourceTree = "<group>"; };
+		D098BFE829ED8FA3005DB231 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		D0E59D6D29D5D3E000A5B7D9 /* CoreDataPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreDataPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0E59D7029D5D3E000A5B7D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0E59D7229D5D3E000A5B7D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 		D056242529D91AC600EDFFD5 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				D098BFE729ED8F96005DB231 /* Extension */,
 				D056242629D91AD400EDFFD5 /* CustomType */,
 			);
 			path = Utility;
@@ -112,6 +115,14 @@
 				D083875629D816AB0098C5C1 /* MemoTableViewCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		D098BFE729ED8F96005DB231 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D098BFE829ED8FA3005DB231 /* UIViewController+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		D0E59D6429D5D3E000A5B7D9 = {
@@ -228,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D056242429D90EAF00EDFFD5 /* DetailViewController.swift in Sources */,
+				D098BFE929ED8FA3005DB231 /* UIViewController+Extension.swift in Sources */,
 				D056242A29D9221A00EDFFD5 /* ColorType.swift in Sources */,
 				D0E59D7529D5D3E000A5B7D9 /* MemoListViewController.swift in Sources */,
 				D0E59D7129D5D3E000A5B7D9 /* AppDelegate.swift in Sources */,
